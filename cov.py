@@ -26,7 +26,7 @@ for i in csvArray.keys():
 	csvArray[i][12] = -9
 
 """Read in ped file"""
-print("Reading in ped file")...
+print("Reading in ped file...")
 pedArray = []
 for line in open(sys.argv[2]):
     pedArray.append(line.split())
@@ -35,4 +35,4 @@ for row in pedArray:
     print(row[0:2])
 
 """Write to covariate file"""
-print("Writing to covariate file")...
+print("Writing to covariate file...")
