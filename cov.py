@@ -29,14 +29,14 @@ for i in csvArray.keys():
     if csvArray[i][9] == "":
         count += 1
         csvArray[i][9] = -9
-print("    Marked " + count + " rows")
+print("    Marked " + str(count) + " rows")
 
 """Read in ped file"""
 print("[50%] ... Reading in ped file...")
 pedArray = []
 count = 0
 for line in open(sys.argv[2]):
-    print("    Reading in row " + count)
+    print("    Reading in row " + str(count))
     pedArray.append(line.split())
 
 for row in pedArray:
