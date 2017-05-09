@@ -36,6 +36,7 @@ print("[50%] ... Reading in ped file...")
 pedArray = []
 count = 0
 for line in open(sys.argv[2]):
+    count += 1
     print("    Reading in row " + str(count))
     pedArray.append(line.split())
 
