@@ -4,6 +4,7 @@ import sys
 csv.field_size_limit(sys.maxsize)
 
 """Reads in data passed by the user from a CSV file."""
+print("Reading in csv data...")
 count = 0
 fileName = sys.argv[1]
 csvArray = {}
@@ -18,12 +19,14 @@ with open(fileName) as csvFile:
     csvFile.close()
 
 """Find rows to remove."""
+print("Removing empty PTSD outcome rows...")
 rmArray = []
 for i in csvArray.keys():
     if csvArray[i][12] == '':
 	csvArray[i][12] = -9
 
 """Read in ped file"""
+print("Reading in ped file")...
 pedArray = []
 for line in open(sys.argv[2]):
     pedArray.append(line.split())
@@ -32,3 +35,4 @@ for row in pedArray:
     print(row[0:2])
 
 """Write to covariate file"""
+print("Writing to covariate file")...
