@@ -11,3 +11,8 @@ GWAS_Jessica.cov
 ~$*
 *.tar*
 *.cov
+*.csv
+*.ped
+*.map
+*.xlsx
+*.gz
