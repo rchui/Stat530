@@ -96,7 +96,7 @@ def exposure():
             exposure = 2
         elif temp >= 15 and temp <= 19:
             exposure = 3
-        elif temp >= 20:
+        elif temp == 31:
             exposure = 4
         else:
             exposure = -9
