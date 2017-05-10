@@ -147,6 +147,7 @@ def sex():
             temp = 2
         elif temp == 2:
             temp = 1
+        covArray[i].append(temp)
         # print("covArray <-- " + str(covArray[i]))
 
 print("    Adding symptom 1 scores")
