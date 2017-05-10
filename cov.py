@@ -115,6 +115,8 @@ def eventType():
             event = 3
         elif temp == 19:
             event = 4
+        elif temp == 31:
+            event = 5
         else:
             event = -9
         covArray[i].append(event)
