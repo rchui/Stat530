@@ -9,3 +9,5 @@ GWAS_Jessica.ped
 GWAS_Jessica.csv
 GWAS_Jessica.cov
 ~$*
+*.tar*
+*.cov
