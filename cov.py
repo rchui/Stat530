@@ -18,9 +18,10 @@ with open(fileName) as csvFile:
 	    csvArray[readRow[2]] = readRow
 	count += 1
     csvFile.close()
+print("    Read in " + str(count) + " lines")
 
 """Find rows to remove."""
-print("[20%] ... Marking empty outcome rows as missing...")
+print("[20%] ... Marking empty outcome rows as missing")
 
 rmArray = []
 count = 0
@@ -37,11 +38,20 @@ for i in csvArray.keys():
     if csvArray[i][51] == '':
         count += 1
         csvArray[i][51] = -9
+    if csvArray[i][7] == '':
+        count += 1
+        csvArray[i][7] = -9
+    if csvArray[i][8] == '':
+        count += 1
+        csvArray[i][8] = -9
+    if csvArray[i][6] == '':
+        count += 1
+        csvArray[i][6] = -9
 
-print("    Marked " + str(count) + " rows")
+print("    Marked " + str(count) + " values as missing")
 
 """Read in ped file"""
-print("[40%] ... Reading in ped file...")
+print("[40%] ... Reading in ped file")
 
 pedArray = []
 count = 0
@@ -49,17 +59,18 @@ for line in open(sys.argv[2]):
     count += 1
     # print("    Reading in row " + str(count))
     pedArray.append(line.split())
-
+print("    Read in " + str(count) + " lines")
 covArray = []
 for row in pedArray:
     # print("covArray <-- " + str(row[0:2]))
     covArray.append(row[0:2])
+print("    Constructed " + str(count) + " line covariate array")
 
 """Build covariate array"""
-print("[60%] ... Writing to covariate file...")
+print("[60%] ... Adding values to covariate array")
 
 def symptoms(start, offset, columns):
-    print("    Starting at [" + str(start) + "] with offset [" + str(offset) + "] for [" + str(columns) + "] values")
+    print("        Starting at [" + str(start) + "] with offset [" + str(offset) + "] for [" + str(columns) + "] values")
     for i in range(len(covArray)):
         temp = 0
         for j in range(columns):
@@ -68,7 +79,6 @@ def symptoms(start, offset, columns):
         # print("covArray <-- " + str(covArray[i]))
 
 def sumSymptoms():
-    print("    Generating total symptom scores")
     for i in range(len(covArray)):
         temp = 0
         for j in range(3):
@@ -77,7 +87,6 @@ def sumSymptoms():
         # print("covArray <-- " + str(covArray[i]))
 
 def ptsdOutcome():
-    print("    Assigning values for PTSD outcomes")
     for i in range(len(covArray)):
         if csvArray[covArray[i][1]][4]:
             temp = int(csvArray[covArray[i][1]][9])
@@ -87,7 +96,6 @@ def ptsdOutcome():
         # print("covArray <-- " + str(covArray[i]))
 
 def exposure():
-    print("    Assessing traumatic exposure")
     for i in range(len(covArray)):
         temp = int(max(csvArray[covArray[i][1]][15], csvArray[covArray[i][1]][51]))
         if temp >= 1 and temp <= 12:
@@ -104,7 +112,6 @@ def exposure():
         # print("covArray <-- " + str(covArray[i]))
 
 def eventType():
-    print("    Getting event type for exposure")
     for i in range(len(covArray)):
         temp = int(max(csvArray[covArray[i][1]][15], csvArray[covArray[i][1]][51]))
         if temp >= 1 and temp <= 7:
@@ -122,11 +129,27 @@ def eventType():
         covArray[i].append(event)
         # print("covArray <-- " + str(covArray[i]))
 
-print("    Adding symptom 1 score")
+def race():
+    for i in range(len(covArray)):
+        covArray[i].append(int(csvArray[covArray[i][1]][6]))
+        # print("covArray <-- " + str(covArray[i]))
+
+def age():
+    for i in range(len(covArray)):
+        temp = int(max(csvArray[covArray[i][1]][7], csvArray[covArray[i][1]][8]))
+        covArray[i].append(temp)
+        # print("covArray <-- " + str(covArray[i]))
+
+def sex():
+    for i in range(len(covArray)):
+        covArray[i].append(int(csvArray[covArray[i][1]][5]))
+        # print("covArray <-- " + str(covArray[i]))
+
+print("    Adding symptom 1 scores")
 symptoms(16, 36, 5)
-print("    Adding symptom 2 score")
+print("    Adding symptom 2 scores")
 symptoms(21, 36, 7)
-print("    Adding symptom 3 score")
+print("    Adding symptom 3 scores")
 symptoms(28, 36, 5)
 print("    Adding summed symptom score")
 sumSymptoms()
@@ -136,6 +159,12 @@ print("    Adding exposure type")
 exposure()
 print("    Adding event type")
 eventType()
+print("    Adding coded race values")
+race()
+print("    Adding ages")
+age()
+print("    Adding coded sex values")
+sex()
 
 """ Write to covariate file """
 print("[80%] ... Writing to covariate file")
