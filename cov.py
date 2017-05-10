@@ -92,6 +92,10 @@ def ptsdOutcome():
             temp = int(csvArray[covArray[i][1]][9])
         else:
             temp = int(csvArray[covArray[i][1]][12])
+        if temp == 1:
+            temp = 2
+        elif temp == 0:
+            temp = 1
         covArray[i].append(temp)
         # print("covArray <-- " + str(covArray[i]))
 
