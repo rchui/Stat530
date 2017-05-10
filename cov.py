@@ -96,6 +96,10 @@ def ptsdOutcome():
             temp = 2
         elif temp == 0:
             temp = 1
+        if temp == 1:
+            covArray[i][2] = -9
+            covArray[i][3] = -9
+            covArray[i][4] = -9
         covArray[i].append(temp)
         # print("covArray <-- " + str(covArray[i]))
 
