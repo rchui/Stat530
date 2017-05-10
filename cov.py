@@ -142,7 +142,11 @@ def age():
 
 def sex():
     for i in range(len(covArray)):
-        covArray[i].append(int(csvArray[covArray[i][1]][5]))
+        temp = int(csvArray[covArray[i][1]][5])
+        if temp == 1:
+            temp = 2
+        elif temp == 2:
+            temp = 1
         # print("covArray <-- " + str(covArray[i]))
 
 print("    Adding symptom 1 scores")
@@ -171,6 +175,7 @@ print("[80%] ... Writing to covariate file")
 
 print("    Opening covariate file")
 covFile = open(sys.argv[3], 'w')
+covFile.write("FID IID REE AVO ARO SEV OUT EXP EVE RAC AGE SEX\n")
 for i in range(len(covArray)):
     covFile.write(covArray[i][0])
     for j in range(len(covArray[i]) - 1):
