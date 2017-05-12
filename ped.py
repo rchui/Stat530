@@ -22,6 +22,8 @@ rmArray = []
 for i in csvArray.keys():
 	if csvArray[i][12] == '':
 		csvArray[i][12] = -9
+        if csvArray[i][9] == '':
+                csvArray[i][9] = -9
 
 """Read in ped file"""
 pedArray = []
@@ -34,9 +36,9 @@ for row in pedArray:
 	else:
 		row[4] = 1
 
-	if csvArray[row[1]][12] == 0:
+	if max(csvArray[row[1]][9], csvArray[row[1]][12]) == 0:
 		row[5] = 1
-	else:
+        elif max(csvArray[row[1]][9], csvArray[row[1]][12]) == 1:
 		row[5] = 2
 
 file = open(sys.argv[3], 'a')
