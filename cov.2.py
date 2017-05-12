@@ -87,6 +87,8 @@ def sumSymptoms():
         # print("covArray <-- " + str(covArray[i]))
 
 def ptsdOutcome():
+    outcomes = 0
+    total = 0
     for i in range(len(covArray)):
         if csvArray[covArray[i][1]][4]:
             temp = int(csvArray[covArray[i][1]][9])
@@ -95,13 +97,16 @@ def ptsdOutcome():
         if temp == 1:
             temp = 2
         elif temp == 0:
+            outcomes += 1
             temp = 1
         if temp == 1:
             covArray[i][2] = -9
             covArray[i][3] = -9
             covArray[i][4] = -9
+        total += 1
         covArray[i].append(temp)
         # print("covArray <-- " + str(covArray[i]))
+    print("        " + str(outcomes) + " cases and " + str(total - outcomes) + " controls")
 
 def exposure():
     for i in range(len(covArray)):
