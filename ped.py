@@ -40,6 +40,8 @@ for row in pedArray:
 		row[5] = 1
         elif max(csvArray[row[1]][9], csvArray[row[1]][12]) == 1:
 		row[5] = 2
+        else:
+                row[5] = -9
 
 file = open(sys.argv[3], 'a')
 output = ""
